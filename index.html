@@ -1,0 +1,172 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Spider-Man Drawing Animation</title>
+
+    <link rel="stylesheet" href="./style.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            width: 100%;
+            min-height: 100%;
+            background: #fff;
+        }
+
+        body {
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            padding: 12px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 25px;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+
+        .subtitle {
+            margin: 0;
+            color: #777;
+            font-size: 13px;
+            text-align: center;
+        }
+
+        .drawing-stage {
+            position: relative;
+            width: 100%;
+            height: min(68vh, 650px);
+            height: min(68dvh, 650px);
+            min-height: 240px;
+            overflow: hidden;
+            background: #fff;
+        }
+
+        #reference {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            left: -9999px;
+            top: 0;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        #drawing {
+            position: absolute;
+            inset: 0;
+            display: block;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        #outline,
+        #fill {
+            pointer-events: none;
+        }
+
+        #outline {
+            clip-path: inset(0 0 100% 0);
+        }
+
+        #fill {
+            opacity: 0;
+            transition: opacity 1500ms ease-in-out;
+        }
+
+        #replay {
+            border: 0;
+            border-radius: 30px;
+            background: #111;
+            color: #fff;
+            padding: 13px 25px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        #replay:hover {
+            background: #333;
+        }
+
+        .footer {
+            margin: 0;
+            color: #888;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        @media (max-width: 480px) {
+            .drawing-stage {
+                height: 65vh;
+                height: 65dvh;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="container">
+        <h1>SPIDER-MAN</h1>
+
+        
+        <section
+            class="drawing-stage"
+            aria-label="Spider-Man drawing animation"
+        >
+            <img
+                id="reference"
+                src="./assets/reference.jpg"
+                alt=""
+            >
+
+            <svg
+                id="drawing"
+                viewBox="0 0 500 700"
+                preserveAspectRatio="xMidYMid meet"
+                role="img"
+                aria-label="Animated Spider-Man silhouette"
+            >
+                <g id="outline"></g>
+                <g id="fill"></g>
+            </svg>
+        </section>
+
+        <button id="replay" type="button">
+            ↻ Replay Animation
+        </button>
+
+      
+    </main>
+
+    <!-- Load the tracing library before script.js -->
+    <script src="https://cdn.jsdelivr.net/npm/imagetracerjs@1.2.6/imagetracer_v1.2.6.js"></script>
+
+    <script src="./script.js"></script>
+</body>
+</html>

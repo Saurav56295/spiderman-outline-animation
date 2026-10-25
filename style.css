@@ -1,0 +1,190 @@
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+}
+
+html {
+    background: #ffffff;
+}
+
+body {
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    overflow-x: hidden;
+    background: #ffffff;
+    color: #111111;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Main page layout */
+.container {
+    width: 100%;
+    max-width: 480px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+}
+
+/* Heading */
+h1 {
+    margin: 0;
+    font-size: clamp(22px, 5vw, 30px);
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-align: center;
+}
+
+.subtitle {
+    margin: 0;
+    color: #777777;
+    font-size: 13px;
+    text-align: center;
+}
+
+/* Drawing area */
+.drawing-stage {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    height: min(68vh, 650px);
+    height: min(68dvh, 650px);
+    min-height: 260px;
+    margin: 0 auto;
+    overflow: hidden;
+    background: #ffffff;
+}
+
+/* Reference image is used by JavaScript only */
+#reference {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    left: -9999px;
+    top: 0;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* SVG drawing */
+#drawing {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    background: transparent;
+    overflow: hidden;
+}
+
+/* Outline layer */
+#outline {
+    clip-path: inset(0 0 100% 0);
+}
+
+/* Solid black fill appears at the end */
+#fill {
+    opacity: 0;
+    transition: opacity 1500ms ease-in-out;
+}
+
+/* Replay button */
+#replay {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 150px;
+    min-height: 46px;
+    margin: 4px auto 0;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 30px;
+    background: #111111;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition:
+        background 180ms ease,
+        transform 180ms ease;
+}
+
+#replay:hover {
+    background: #333333;
+}
+
+#replay:active {
+    transform: scale(0.97);
+}
+
+#replay:focus-visible {
+    outline: 3px solid #888888;
+    outline-offset: 4px;
+}
+
+/* Footer */
+.footer {
+    margin: 0;
+    color: #888888;
+    font-size: 12px;
+    line-height: 1.5;
+    text-align: center;
+}
+
+/* Mobile screens */
+@media (max-width: 480px) {
+    body {
+        padding: 12px;
+    }
+
+    .container {
+        gap: 12px;
+    }
+
+    .drawing-stage {
+        width: 100%;
+        height: min(65vh, 600px);
+        height: min(65dvh, 600px);
+        min-height: 240px;
+    }
+}
+
+/* Short screens */
+@media (max-height: 550px) {
+    body {
+        justify-content: flex-start;
+    }
+
+    .drawing-stage {
+        height: 55vh;
+        height: 55dvh;
+        min-height: 180px;
+    }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    #fill {
+        transition-duration: 200ms;
+    }
+
+    #replay {
+        transition: none;
+    }
+}
